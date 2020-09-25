@@ -50,11 +50,11 @@ def set_brightness(value):
     '''
     Function to set Brightness of the Screen
     '''
-    os.system(f"echo {max(350,value*200)} | sudo tee /sys/class/backlight/intel_backlight/brightness")
+    os.system(f"echo {min(7500,max(350,value*200))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 if __name__ == "__main__":
     ans = 0
-    for _ in range(2):
+    for _ in range(3):
         ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
     
     a_light = int((ans//10)+1)
