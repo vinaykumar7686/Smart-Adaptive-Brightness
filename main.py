@@ -1,4 +1,4 @@
-import cv2, time
+import cv2, time, os
 
 def Capture_Gray_Image():
     '''
@@ -30,7 +30,7 @@ def get_Ambient_light_Value(img):
 
     Returned Value: (Method1+Method2)/2
     '''
-    if not img:
+    if not img.any():
         return -99
 
     m1_val = (cv2.resize(img, (1 , 1)))[0][0]
@@ -46,6 +46,16 @@ def get_Ambient_light_Value(img):
 
     return (m1_val+m2_val)/2
 
+
+if __name__ == "__main__":
+    ans = 0
+    for _ in range(2):
+        ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
+    
+    alight = int((ans//10)+1)
+
+    import os
+    os.system(f"echo {alight*100} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 
 
