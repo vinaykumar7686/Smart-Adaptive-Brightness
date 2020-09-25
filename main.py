@@ -30,6 +30,8 @@ def get_Ambient_light_Value(img):
 
     Returned Value: (Method1+Method2)/2
     '''
+    if not img:
+        return -99
 
     m1_val = (cv2.resize(img, (1 , 1)))[0][0]
 
@@ -43,7 +45,8 @@ def get_Ambient_light_Value(img):
     m2_val = m2_val/r
 
     return (m1_val+m2_val)/2
-    
+
+
 
 
 
