@@ -46,6 +46,11 @@ def get_Ambient_light_Value(img):
 
     return (m1_val+m2_val)/2
 
+def set_brightness(value):
+    '''
+    Function to set Brightness of the Screen
+    '''
+    os.system(f"echo {max(350,value*200)} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 if __name__ == "__main__":
     ans = 0
@@ -54,5 +59,5 @@ if __name__ == "__main__":
     
     a_light = int((ans//10)+1)
     print(f"Ambient Light Detected: {a_light}")
-    import os
-    os.system(f"echo {max(350,a_light*200)} | sudo tee /sys/class/backlight/intel_backlight/brightness")
+
+    set_brightness(a_light)
