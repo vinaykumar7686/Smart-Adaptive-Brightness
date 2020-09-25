@@ -1,4 +1,38 @@
-import cv2
+import cv2, time
+
+def Capture_Gray_Image():
+    '''
+    Function to Capture a Image and return it in grayscale
+    '''
+    vc = cv2.VideoCapture(0)
+
+    if vc.isOpened():
+        rval, img = vc.read()
+    else:
+        rval = False
+    
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    if not rval:
+        return []
+    else:
+        return img
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+'''import cv2
 
 cv2.namedWindow("preview")
 vc = cv2.VideoCapture(0)
@@ -34,7 +68,9 @@ while rval:
 cv2.destroyWindow("preview")
 
 
-'''import cv2
+'''
+'''
+import cv2
 
 vc = cv2.VideoCapture(0)
 
