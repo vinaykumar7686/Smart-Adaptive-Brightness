@@ -35,8 +35,8 @@ def get_Ambient_light_Value(img):
 
     m2_val = 0
 
-    r = len(gray)
-    c = len(rows)
+    r = len(img)
+    c = len(img[0])
     for rows in img:
         m2_val+=(sum(rows))/c
 
