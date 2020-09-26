@@ -1,4 +1,14 @@
-import cv2, time, os
+import cv2, time, os, platform 
+
+plt = platform.system()
+
+if plt in ["Windows", "Linux"]:
+    print(f"System identified as {plt}")
+
+else:
+    print("Unidentified System")
+    exit()
+
 
 def Capture_Gray_Image():
     '''
@@ -50,11 +60,16 @@ def set_brightness(value):
     '''
     Function to set Brightness of the Screen
     '''
-    '''
-    Command for powershell: 
-    os.system("powershell.exe (Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1,75)")
-    '''
-    os.system(f"echo {min(7500,max(350,value*200))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
+    value = min(50, value)
+
+    if plt == "Windows":
+        print("Applying Brightness changes to your Windows System")
+        os.system(f"powershell.exe (Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1,{2*value})")
+
+    elif plt == "Linux":
+        print("Applying Brightness changes to your Linux System")
+        os.system(f"echo {min(7500,max(400,(400+(value-1)*145)))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
+
 
 if __name__ == "__main__":
     ans = 0
