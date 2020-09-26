@@ -50,6 +50,10 @@ def set_brightness(value):
     '''
     Function to set Brightness of the Screen
     '''
+    '''
+    Command for powershell: 
+    os.system("powershell.exe (Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1,75)")
+    '''
     os.system(f"echo {min(7500,max(350,value*200))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 if __name__ == "__main__":
