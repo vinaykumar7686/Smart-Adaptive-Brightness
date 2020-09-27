@@ -53,7 +53,8 @@ def get_Ambient_light_Value(img):
         m2_val+=(sum(rows))/c
 
     m2_val = m2_val/r
-
+    
+    print((m1_val,m2_val))
     return (m1_val+m2_val)/2
 
 def set_brightness(value):

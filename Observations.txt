@@ -1,0 +1,8 @@
+DISCONTINUING 1ST METHOD:
+
+
+I was using two methods to detect the average brightness of image content. But one fact, remained un-noticed until I started my testing for on screen content. 
+FACT: It was the image compression method that was not giving accurate results, and thus led to misleading calculations of the contents brightness.
+POSSIBLE REASONS: While converting the whole image into a single pixel, It was emphasizing more on content in centre of screen, rather than whole screen's content.
+
+Observations: (63, 225.0857060185208) These are the values obtained by method 1 and 2 respectively,  and such a huge difference was noticed. Hence, I'm Discontinuing Method 1.
