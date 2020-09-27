@@ -71,7 +71,15 @@ def set_brightness(value):
         os.system(f"echo {min(7500,max(400,(400+(value-1)*145)))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 
+def win_feature():
+    import pyautogui, numpy as np
+    img = pyautogui.screenshot()
+    img = np.array(img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    print(get_Ambient_light_Value(img))
+
 if __name__ == "__main__":
+    win_feature()
     ans = 0
     for _ in range(3):
         ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
