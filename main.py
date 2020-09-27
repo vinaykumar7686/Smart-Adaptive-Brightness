@@ -32,36 +32,31 @@ def get_Ambient_light_Value(img):
     '''
     Function to return ambient lighting value.
 
-    It returns average of calculation through two methods.
+    Method: Iterate throuch all the pixels of the image and find their average
 
-    Method1: Compress an image to a single pixel and extract its value.
-
-    Method2: Iterate throuch all the pixels of the image and find their average
-
-    Returned Value: (Method1+Method2)/2
+    Return Ambient Light Value between 0 to 255
     '''
     if not img.any():
         return -99
 
-    m1_val = (cv2.resize(img, (1 , 1)))[0][0]
+    #m1_val = (cv2.resize(img, (1 , 1)))[0][0]
 
-    m2_val = 0
+    val = 0
 
     r = len(img)
     c = len(img[0])
     for rows in img:
-        m2_val+=(sum(rows))/c
+        val+=(sum(rows))/c
 
-    m2_val = m2_val/r
+    val = val/r
     
-    print((m1_val,m2_val))
-    return (m1_val+m2_val)/2
+    return val
 
 def set_brightness(value):
     '''
     Function to set Brightness of the Screen
+    Accepts Value 1 to 50
     '''
-    value = min(50, value)
 
     if plt == "Windows":
         print("Applying Brightness changes to your Windows System")
@@ -72,7 +67,7 @@ def set_brightness(value):
         os.system(f"echo {min(7500,max(400,(400+(value-1)*145)))} | sudo tee /sys/class/backlight/intel_backlight/brightness")
 
 
-def win_feature():
+def screen_snap_value():
     
     img = pyautogui.screenshot()
     img = np.array(img)
@@ -84,17 +79,27 @@ def win_feature():
     '''
     val = get_Ambient_light_Value(img)
     ret =  int((val*49)/255)+1
-    print(val,ret)
-    set_brightness(51-ret)
+    # print(val,ret)
+
+    return 51-ret
 
 
 if __name__ == "__main__":
-    win_feature()
-    ans = 0
-    for _ in range(3):
-        ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
-    
-    a_light = int((ans//10)+1)
-    print(f"Ambient Light Detected: {a_light}")
+    while True:
 
-    #set_brightness(a_light)
+        ans = 0
+        for _ in range(3):
+            ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
+        
+        a_light = int((ans//10)+1)
+        print(f"Ambient Light Detected: {a_light}")
+
+        a_light = min(50, a_light)
+
+        ssv = screen_snap_value()
+
+        value = (ssv+a_light)/2
+
+        print((ssv, a_light, value))
+
+        set_brightness(value)
