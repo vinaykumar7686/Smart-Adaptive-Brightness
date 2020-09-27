@@ -81,8 +81,11 @@ def win_feature():
     cv2.namedWindow("preview")
     cv2.imshow("preview", img)
     '''
-    print(img[0])
-    print(get_Ambient_light_Value(img))
+    val = get_Ambient_light_Value(img)
+    ret =  int((val*49)/255)+1
+    print(val,ret)
+    set_brightness(51-ret)
+
 
 if __name__ == "__main__":
     win_feature()
@@ -93,4 +96,4 @@ if __name__ == "__main__":
     a_light = int((ans//10)+1)
     print(f"Ambient Light Detected: {a_light}")
 
-    set_brightness(a_light)
+    #set_brightness(a_light)
