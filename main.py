@@ -1,4 +1,4 @@
-import cv2, time, os, platform 
+import cv2, time, os, platform, pyautogui, numpy as np
 
 plt = platform.system()
 
@@ -72,10 +72,16 @@ def set_brightness(value):
 
 
 def win_feature():
-    import pyautogui, numpy as np
+    
     img = pyautogui.screenshot()
     img = np.array(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    '''
+    # Image Preview
+    cv2.namedWindow("preview")
+    cv2.imshow("preview", img)
+    '''
+    print(img[0])
     print(get_Ambient_light_Value(img))
 
 if __name__ == "__main__":
