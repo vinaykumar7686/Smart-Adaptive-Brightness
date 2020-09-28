@@ -86,9 +86,9 @@ def screen_snap_value():
 
 if __name__ == "__main__":
     while True:
-
+        time.sleep(10)
         ans = 0
-        for _ in range(3):
+        for _ in range(1):
             ans+=(get_Ambient_light_Value(Capture_Gray_Image()))
         
         a_light = int((ans//10)+1)
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
         ssv = screen_snap_value()
 
-        value = (ssv+a_light)/2
+        value = (ssv+2*a_light)/3
 
         print((ssv, a_light, value))
 
